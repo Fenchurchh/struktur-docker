@@ -1,0 +1,54 @@
+version: '2'
+
+networks:
+  db:
+    external: false
+  default:
+    external:
+      name: saas-internal
+
+services:
+  api:
+    container_name: "${DOMAIN}"
+    build: .
+    image: strapi/strapi
+    
+    environment:
+      - VIRTUAL_HOST=${DOMAIN}
+      - LETSENCRYPT_HOST=${DOMAIN}
+      - LETSENCRYPT_EMAIL=mirko.friedrich@blandland.de
+      - APP_NAME=strapi-app
+      - DATABASE_CLIENT=mongo
+      - DATABASE_HOST=db
+      - DATABASE_PORT=27017
+      - DATABASE_NAME=strapi
+      - DATABASE_USERNAME=
+      - DATABASE_PASSWORD=
+      - DATABASE_SSL=false
+      - DATABASE_AUTHENTICATION_DATABASE=strapi
+    expose:
+      - "1337"
+    #ports:
+      #- 1337:1337
+    networks:
+      - db
+      - default
+    volumes:
+      - ./strapi-app:/usr/src/api/strapi-app
+      #- /usr/src/api/strapi-app/node_modules
+    depends_on:
+      - db
+    restart: always
+  db:
+    container_name: "${DOMAIN}.db"
+    image: mongo
+    networks:
+      - db
+      - default
+    environment:
+      - MONGO_INITDB_DATABASE=strapi
+    expose:
+      - 27017
+    volumes:
+      - ./db:/data/db
+    restart: always
