@@ -1,6 +1,6 @@
 FROM node:11.1.0-alpine
 
-LABEL maintainer="Luca Perret <perret.luca@gmail.com>" \
+LABEL maintainer="Mirko Friedrich <mirko@uioo.io>" \
       org.label-schema.vendor="Strapi" \
       org.label-schema.name="Strapi Docker image" \
       org.label-schema.description="Strapi containerized" \
