@@ -41,7 +41,8 @@ services:
     restart: always
   db:
     container_name: "${DOMAIN}.db"
-    image: mongo
+    #image: mongo
+    image: localhost:5000/db-basic:latest
     networks:
       - db
       - default
