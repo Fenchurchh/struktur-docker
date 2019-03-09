@@ -26,6 +26,7 @@ services:
       - DATABASE_PASSWORD=
       - DATABASE_SSL=false
       - DATABASE_AUTHENTICATION_DATABASE=strapi
+      - NODE_ENV=production
     expose:
       - "1337"
     #ports:
