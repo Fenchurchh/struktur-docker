@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 
 services:
     db:
@@ -10,6 +10,8 @@ services:
             - default
             - backend
         build: .
+        volumes: 
+            - ./src:/var/www/html
         environment:
             VIRTUAL_HOST: ${DOMAIN}
             VIRTUAL_PORT: 80
